@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>Mini Project</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="mdb.min.css" rel="stylesheet">
+    <style>
+      #intro,
+      body,
+      html {
+        height: 100%;
+      }
+
+      .footer {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        background-color: grey;
+        color: white;
+        text-align: center;
+      }
+
+      p {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+      }
+
+      #intro {
+        background: url("home_bg.jpg")no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+
+      .top-nav-collapse {
+        background-color: #24355C;
+      }
+
+      @media (max-width: 768px) {
+        .navbar:not(.top-nav-collapse) {
+          background-color: #24355C;
+        }
+      }
+
+      @media (min-width: 800px) and (max-width: 850px) {
+        .navbar:not(.top-nav-collapse) {
+          background-color: #24355C;
+        }
+      }
+    </style>
+    <script>pwd='q@w#'</script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="web-home.html">NGO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#boat" aria-controls="boat" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="boat">
+          <ul class="navbar-nav mr-auto smooth-scroll">
+            <li class="nav-item active">
+              <a class="nav-link" href="web-home.html">Internal Task Manager<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="intro" class="view">
+      <div class="mask rgba-black-strong">
+        <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-md-10">
+              <h2 class="display-3 font-weight-bold white-text pt-5 mb-2">NGO Internal Task Manager</h2>
+              <hr class="hr-light">
+              <h4 class="white-text my-4">Login as an Admin to access NGO management solutions</h4>
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter">
+                Login as an Admin
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        <b>Admin Login</b>
+                      </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p style="font-weight: bold; text-align: center; text-decoration-style: wavy;">Authorize as an Admin to get Super Powers!!</p>
+                      <input type="password" class="form-control" name="pwd" id="pwd" aria-describedby="helpId" placeholder="Enter the Admin PassCode">
+                      <small style="text-align: left; !important" id="helpId" class="form-text text-muted">With Great Power Comes Great Responsibility</small>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success" onclick="log()">Login</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>A Web Lab Mini Project Done By
+        <b>MOHAMMED HAMMAAD MATEEN</b>
+        and
+        <b>RAHUL MONDAL</b>
+      </p>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script>
+      function log(){
+      var pwdValue = document.getElementById("pwd").value;
+      if (pwdValue == '') {
+        alert("PassCode Is Empty");
+      } else if (pwdValue != pwd) {
+        alert("Wrong PassCode");
+      } else {
+        alert("Successful Login, Welcome Admin!! Press OK to Continue");
+        window.location = "http://localhost/Mproj/web-dashboard-ui.php";
+      }
+    }
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+
+</html>

@@ -1,0 +1,55 @@
+create table VOL_DETAILS (Vol_id int(4) primary key , Name varchar(40) not null,
+Address varchar(50) not null, Phno bigint constraint ok check (Phno>8000000000 AND Phno<9999999999), Date_join date, Active enum('1','0') default '1' );
+
+create table VOL_SKILL (Vol_id int(4) references VOL_DETAILS(Vol_id) on delete cascade, Skill varchar(25) , 
+primary key(Vol_id,Skill) );
+
+create table DISTRIBUTION (Vol_id int(4) references VOL_DETAILS(Vol_id) , 
+Date date, Quantity int(3) not null,Vhcl_info varchar(11) not null,
+Pick_loc varchar(25) not null,Drop_loc varchar(25) not null, primary key(Vol_id,Date) );
+
+create table EVENT (Event_id int(4) primary key , 
+Vol_id int(4) references VOL_DETAILS(Vol_id), Date date , 
+Venue varchar(25) not null, No_vol int(3) not null, Summary text, 
+Response enum('Awesome','Good','Average','Improvement','Bad') default 'Good' );
+
+create table FUND_MGMT (Trans_id int(4) primary key, Vol_id int(4) references VOL_DETAILS(Vol_id) 
+on delete no action, Particulars varchar(50) not null, Trans_type enum('Withdrawal','Deposit') not null,
+Amt int(10), Bal_amt int(10));
+
+
+create table F_DONS (D_id int(4)  primary key, Donor_name varchar(45) not null, Phno bigint, Date date, 
+Co_loc varchar(25) not null, Quantity int(3) not null );
+
+create table M_DONS (D_id int(4)  primary key,Donor_name varchar(45) not null, Phno bigint,  Date date, 
+Amt int(3) not null, Rcv_stats enum('Received','Cancelled','Pending') default 'Pending' );
+
+
+XP View;
+create view Xp as select Vol_id, Name, Address, Phno, Date_join, Active, timestampdiff(year,Date_join,now()) as Experience from VOL_DETAILS;
+CREATE view v_full AS SELECT x.vol_id, x.name, x.address, x.phno, x.date_join, x.active, x.experience,k.skill
+    -> from xp as x, vol_skill as k
+    -> where x.Vol_id=k.Vol_id;
+
+    CREATE view fund_full AS
+    SELECT m.Trans_id,m.Vol_id,t.Date,m.Particulars,m.Trans_type,m.Amt
+    from fund_mgmt as m, fund_trigg as t
+    where m.Trans_id=t.Trans_id;
+
+BALANCE View;
+create view B as select sum(Amt) as Balance from FUND_MGMT;
+
+Trigger:
+create table fund_trigg(Trans_id int(4), Date date);
+
+delimiter //
+create trigger datafins after insert on fund_mgmt for each row 
+begin insert into fund_trigg (Trans_id,Date) values (NEW.Trans_id, CURDATE());
+end;//
+
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dosum`()
+begin select sum(Amt) as dom from m_dons; end
+
+
